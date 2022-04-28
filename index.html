@@ -12,16 +12,17 @@
     <section>
         <div class="wrapper">
             <div class="container">
-                <form>
+                <form id="form">
                     <h1 class="add">Add new items:</h1>
                     <div class="form-group">
                       <label for="exampleFormControlInput1">Description</label>
-                      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Describe the issue...">
+                      <input class="form-control" id="description-value" placeholder="Describe the issue..." required>
                     </div>
                     <br>
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Severity</label>
-                      <select class="form-control" id="exampleFormControlSelect1">
+                      <select class="form-control" id="severity-value">
+                        <option> Select One </option>
                         <option>High</option>
                         <option>Medium</option>
                         <option>Low</option>
@@ -30,15 +31,31 @@
                     <br>
                     <div class="form-group">
                       <label for="exampleFormControlTextarea1">Assigned to</label>
-                      <input  class="form-control" id="exampleFormControlInput1" placeholder="Enter responsible...">
+                      <input  class="form-control" id="assigned-value" placeholder="Enter responsible..." required>
                     </div>
                     <br>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-lg">Add</button>
+                        <button type="submit" id="add-btn" class="btn btn-primary btn-lg">Add</button>
                       </div>
                   </form>
             </div>
         </div>
+
+        <!-- <fieldset>
+          <legend>Output</legend>
+          <div id="output-value"></div>
+        </fieldset> -->
+            
+        
     </section>
+    <section>
+      <div class="wrapper-2" id="message">
+        <div id="output-value"></div>
+      </div>
+    </section>
+
+    
+    <script src="./text.js"></script>
+
 </body>
 </html>
