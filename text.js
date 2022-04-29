@@ -29,6 +29,9 @@ form.addEventListener('submit', function(event){
         showList();
         // const db = localStorage.getItem("1");
         // console.log(db);
+        document.getElementById('description-value').value = '';  
+        document.getElementById('severity-value').value = '';
+        document.getElementById('assigned-value').value = '';
     }
 
 
@@ -102,13 +105,37 @@ function showList(){
         const closeBtn = document.createElement("button");
         closeBtn.innerHTML = `Close`;
         closeBtn.setAttribute('class', 'close-button');
+        closeBtn.setAttribute('id', 'cButton');
         displayDiv.append(closeBtn);
+        
+        
+
         const deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = `delete`;
         deleteBtn.setAttribute('class', 'delete-button');
         displayDiv.append(deleteBtn);
+
+        // var cButton = document.getElementById("cButton");
+        // cButton.addEventListener('click', function (){
+        
+        //     console.log(this).innerText = 'close'
+
+        // document.querySelector('.open-button').innerText = 'close'
+        // const openClose = document.getElementsByClassName('open-button');
+            // openClose.innerText  = 'close';
+        // });
+
+       
     }
+    var cButton = document.getElementById("cButton");
+    cButton.addEventListener('click', function (){
+    document.querySelector('.open-button').innerText = 'close'
+    const openClose = document.getElementsByClassName('open-button');
+        // openClose.innerText  = 'close';
+    });
 }
+
+
 function validateForm(){
     const form = document.getElementById('form');
     const desValue = form['des'].value;
