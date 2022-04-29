@@ -7,67 +7,35 @@ form.addEventListener('submit', function(event){
     const description = document.getElementById('description-value').value;
     const severity = document.getElementById('severity-value').value;
     const assigned = document.getElementById('assigned-value').value;
-    const output =document.getElementById('message');
+    const output =document.getElementsByClassName('wrapper-2');
     
-    // const lsOutput = document.getElementById('output-value')
 
-    // console.log(description);
-    // console.log(severity);
-    // console.log(assigned);
-
-    const lsKey = [description, severity, assigned, Math.random() * 1000000 ];
-    // console.log(lsKey[0], lsKey[1], lsKey[2]);
+    const lsKey = [description, severity, assigned, Math.floor(Math.random() * 1000000) ];
 
     const issue = JSON.stringify(lsKey);
 
-     console.log(issue);
 
     if(description && assigned || severity){
-        // const id = Math.floor(Math.random() * 10);
-        // console.log(id);
         localStorage.setItem("id", issue);
         showList();
-        // const db = localStorage.getItem("1");
-        // console.log(db);
         document.getElementById('description-value').value = '';  
         document.getElementById('severity-value').value = '';
         document.getElementById('assigned-value').value = '';
     }
-
-
-
-    // for(let i =0; i < localStorage.length; i++ ){
-    //     const key = localStorage.key(i);
-    //     const value =localStorage.getItem(key);
-    //     console.log(value);
-
-    //     lsOutput.innerHTML = `${value}<br/>`;
-    // }
-
     
 });
 
 function showList(){
-    // console.log(localStorage);
-    // console.log(localStorage.length);
     for(let i =0; i < localStorage.length; i++ ){
         const key = localStorage.key(i);
 
-        console.log(key);
         const value =localStorage.getItem(key);
-        console.log(value);
-        const showIssue = JSON.parse(value);
-
-        
-        // lsOutput.innerHTML += `${showIssue[1]}<br>${showIssue[2]}<br>`;
-        // issueID.innerHTML += `Issue id: ${showIssue[3]}`;
-        // // display_data.innerHTML = 
+        const showIssue = JSON.parse(value);        
         const displayDiv = document.createElement('div');
         displayDiv.setAttribute('class', 'wrapper-2');
-        displayDiv.setAttribute('id', 'message');
+        displayDiv.setAttribute('id', `wrapper-${showIssue[3]}`);
         document.getElementById("display_data").appendChild(displayDiv);
 
-        
 
         const para1 = document.createElement("p");
         para1.innerHTML = `Issue id: ${showIssue[3]}`;
@@ -75,7 +43,9 @@ function showList(){
 
         const openBtn = document.createElement("button");
         openBtn.innerHTML = `open`;
-        openBtn.setAttribute('class', 'open-button');
+        openBtn.setAttribute('class', `open-button`);
+        openBtn.setAttribute('id', `open-button-${showIssue[3]}`);
+
         displayDiv.append(openBtn);
 
         const high1 = document.createElement("h1");
@@ -91,8 +61,6 @@ function showList(){
         const icon2 = document.createElement('i')
         icon2.setAttribute('class' , 'far fa-clock');
         para2.prepend(icon2);
-        //paraIcon.append(icon2);
-        //paraIcon.append(para2);
         displayDiv.append(para2);
 
         const para3 = document.createElement("p");
@@ -105,7 +73,8 @@ function showList(){
         const closeBtn = document.createElement("button");
         closeBtn.innerHTML = `Close`;
         closeBtn.setAttribute('class', 'close-button');
-        closeBtn.setAttribute('id', 'cButton');
+        closeBtn.setAttribute('onclick', `closeIssue('${showIssue[3]}')`);
+        
         displayDiv.append(closeBtn);
         
         
@@ -113,28 +82,29 @@ function showList(){
         const deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = `delete`;
         deleteBtn.setAttribute('class', 'delete-button');
+        deleteBtn.setAttribute('onclick', `deleteIssue('${showIssue[3]}')`);
         displayDiv.append(deleteBtn);
 
-        // var cButton = document.getElementById("cButton");
-        // cButton.addEventListener('click', function (){
-        
-        //     console.log(this).innerText = 'close'
 
-        // document.querySelector('.open-button').innerText = 'close'
-        // const openClose = document.getElementsByClassName('open-button');
-            // openClose.innerText  = 'close';
-        // });
+
+    
 
        
     }
-    var cButton = document.getElementById("cButton");
-    cButton.addEventListener('click', function (){
-    document.querySelector('.open-button').innerText = 'close'
-    const openClose = document.getElementsByClassName('open-button');
-        // openClose.innerText  = 'close';
-    });
+        
+    
+ 
+}
+function closeIssue(id){    
+    document.querySelector(`#open-button-${id}`).innerText = 'close';
+
+
 }
 
+function deleteIssue(id){
+    console.log(id);
+    document.querySelector(`#wrapper-${id}`).remove();
+}
 
 function validateForm(){
     const form = document.getElementById('form');
